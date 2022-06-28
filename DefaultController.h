@@ -12,6 +12,7 @@ public:
   DefaultController(IModel* model);
   ~DefaultController() override;
 
+//public slots:
   void ChangeInput(std::string value) override;
   void Clean() override;
   void CalculateResult() override;

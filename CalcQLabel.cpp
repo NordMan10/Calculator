@@ -13,7 +13,7 @@ CalcQLabel::CalcQLabel(std::string text)
 
 CalcQLabel::~CalcQLabel()
 {
-
+  delete m_Label;
 }
 
 QLabel* CalcQLabel::GetLabel() const

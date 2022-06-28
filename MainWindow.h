@@ -5,6 +5,7 @@
 #include "IModel.h"
 #include "IController.h"
 #include "CalcQLabel.h"
+#include <QSignalMapper>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,6 +20,14 @@ public:
   MainWindow(IModel* model, IController* controller);
 
   ~MainWindow();
+
+  void Initialize();
+
+public slots:
+  void ChangeInputButtonClicked(std::string);
+  void Clean();
+  void Backspace();
+  void GetResult();
 
 private:
   Ui::MainWindow* ui;
