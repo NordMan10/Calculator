@@ -12,8 +12,19 @@ MainWindow::MainWindow(QWidget *parent)
 
 }
 
+MainWindow::MainWindow(IModel* model, IController* controller)
+  : m_Model(model), m_Controller(controller) {}
+
 MainWindow::~MainWindow()
 {
   delete ui;
+  delete m_Model;
+  delete m_Controller;
+  delete m_MainInputLabel;
+  delete m_MainOutputLabel;
 }
 
+void MainWindow::Initialize()
+{
+
+}

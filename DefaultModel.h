@@ -7,6 +7,7 @@ class DefaultModel : public IModel
 {
 public:
   DefaultModel();
+  ~DefaultModel() override;
 
   void Calculate() override;
   void PushIntoInputLable(std::string text) override;

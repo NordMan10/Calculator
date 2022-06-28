@@ -9,6 +9,7 @@ class CalcQLabel : public LabelObserver
 public:
   CalcQLabel();
   CalcQLabel(std::string text);
+  ~CalcQLabel() override;
 
   void Update(std::string text) override;
   QLabel* GetLabel() const;

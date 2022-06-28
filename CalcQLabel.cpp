@@ -7,8 +7,13 @@ CalcQLabel::CalcQLabel()
 
 CalcQLabel::CalcQLabel(std::string text)
 {
-  CalcQLabel();
+  m_Label = new QLabel();
   m_Label->setText(QString::fromStdString(text));
+}
+
+CalcQLabel::~CalcQLabel()
+{
+
 }
 
 QLabel* CalcQLabel::GetLabel() const

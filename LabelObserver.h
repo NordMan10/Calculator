@@ -5,6 +5,9 @@
 
 class LabelObserver
 {
+public:
+  virtual ~LabelObserver() {};
+
   virtual void Update(std::string) {};
 };
 

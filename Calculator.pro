@@ -10,7 +10,6 @@ CONFIG += c++17
 
 SOURCES += \
     CalcQLabel.cpp \
-    CalculatorModel.cpp \
     DefaultController.cpp \
     DefaultModel.cpp \
     main.cpp \
@@ -18,9 +17,9 @@ SOURCES += \
 
 HEADERS += \
     CalcQLabel.h \
-    CalculatorModel.h \
     DefaultController.h \
     DefaultModel.h \
+    IController.h \
     IModel.h \
     LabelObserver.h \
     MainWindow.h

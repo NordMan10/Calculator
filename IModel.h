@@ -7,6 +7,8 @@
 class IModel
 {
 public:
+  virtual ~IModel() {};
+
   virtual void Calculate() {};
   virtual void PushIntoInputLable(std::string) {};
   virtual void Backspace() {};

@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "IModel.h"
+#include "IController.h"
+#include "CalcQLabel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -13,9 +16,16 @@ class MainWindow : public QMainWindow
 
 public:
   MainWindow(QWidget *parent = nullptr);
+  MainWindow(IModel* model, IController* controller);
+
   ~MainWindow();
 
 private:
-  Ui::MainWindow *ui;
+  Ui::MainWindow* ui;
+  IModel* m_Model;
+  IController* m_Controller;
+
+  CalcQLabel* m_MainInputLabel;
+  CalcQLabel* m_MainOutputLabel;
 };
 #endif // MAINWINDOW_H

@@ -10,6 +10,11 @@ void DefaultModel::Calculate()
 
 }
 
+DefaultModel::~DefaultModel()
+{
+
+}
+
 void DefaultModel::PushIntoInputLable(std::string text)
 {
 
