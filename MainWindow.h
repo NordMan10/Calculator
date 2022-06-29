@@ -24,7 +24,8 @@ public:
   void Initialize();
 
 public slots:
-  void ChangeInputButtonClicked(std::string);
+  void DigitButtonClicked(QString);
+  void OperationButtonClicked(QString);
   void Clean();
   void Backspace();
   void GetResult();

@@ -15,20 +15,38 @@ void DefaultModel::Calculate()
 
 }
 
-void DefaultModel::PushIntoInputLabel(std::string text)
+void DefaultModel::PushDigitIntoInputLabel(QString text)
 {
   m_MainInputLabel += text;
   NotifyMainInputLabelObservers(m_MainInputLabel);
+  //NotifyMainOutputLabelObservers(m_MainInputLabel);
+}
+
+void DefaultModel::PushOperationIntoInputLabel(QString text)
+{
+  if (m_MainInputLabel.length() > 0)
+  {
+    auto lastChar = m_MainInputLabel.right(1);
+//    if (!m_OperationList.contains(lastChar))
+//    {
+//      m_MainInputLabel += text;
+//      NotifyMainInputLabelObservers(m_MainInputLabel);
+//    }
+  }
+
+  //NotifyMainOutputLabelObservers(m_MainInputLabel);
 }
 
 void DefaultModel::Backspace()
 {
-  m_MainInputLabel = m_MainInputLabel.substr(m_MainInputLabel.length() - 2, 1);
+  m_MainInputLabel = m_MainInputLabel.left(m_MainInputLabel.length() - 1);
+  NotifyMainInputLabelObservers(m_MainInputLabel);
 }
 
 void DefaultModel::Clean()
 {
-  m_MainInputLabel = "";
+  m_MainInputLabel = "0";
+  NotifyMainInputLabelObservers(m_MainInputLabel);
 }
 
 void DefaultModel::AddMainInputLabelObserver(LabelObserver* observer)
@@ -53,7 +71,7 @@ void DefaultModel::RemoveMainOutputLabelObserver(LabelObserver* observer)
                                               observer), m_MainOutputLabelObservers.end());
 }
 
-void DefaultModel::NotifyMainInputLabelObservers(std::string text)
+void DefaultModel::NotifyMainInputLabelObservers(QString text)
 {
   for (auto observer : m_MainInputLabelObservers)
   {
@@ -61,7 +79,7 @@ void DefaultModel::NotifyMainInputLabelObservers(std::string text)
   }
 }
 
-void DefaultModel::NotifyMainOutputLabelObservers(std::string text)
+void DefaultModel::NotifyMainOutputLabelObservers(QString text)
 {
   for (auto observer : m_MainOutputLabelObservers)
   {

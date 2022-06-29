@@ -8,14 +8,14 @@ MainWindow::MainWindow(QWidget *parent)
 {
   ui->setupUi(this);
 
-  Initialize();
-
 }
 
 MainWindow::MainWindow(IModel* model, IController* controller)
-  : m_Model(model), m_Controller(controller)
+  : ui(new Ui::MainWindow), m_Model(model), m_Controller(controller)
 {
-  MainWindow();
+  ui->setupUi(this);
+
+  Initialize();
 }
 
 MainWindow::~MainWindow()
@@ -29,39 +29,48 @@ MainWindow::~MainWindow()
 
 void MainWindow::Initialize()
 {
-  QSignalMapper* signalMapper = new QSignalMapper(this);
+  m_MainInputLabel = new CalcQLabel(ui->input_label);
+  m_MainOutputLabel = new CalcQLabel(ui->output_label);
 
-  QObject::connect(ui->one_button, SIGNAL(clicked()), signalMapper, SLOT(map()));
-  signalMapper->setMapping(ui->one_button, "1");
-  connect(signalMapper, SIGNAL(mapped(std::string)), this, SLOT(ChangeInputButtonClicked(std::string)));
-//  connect(ui->two_button, SIGNAL(clicked()), this, SLOT(ChangeInputButtonClicked()));
-//  connect(ui->three_button, SIGNAL(clicked()), this, SLOT(ChangeInputButtonClicked(std::string value)));
-//  connect(ui->four_button, SIGNAL(clicked()), this, SLOT(ChangeInputButtonClicked(std::string value)));
-//  connect(ui->five_button, SIGNAL(clicked()), this, SLOT(ChangeInputButtonClicked(std::string value)));
-//  connect(ui->six_button, SIGNAL(clicked()), this, SLOT(ChangeInputButtonClicked(std::string value)));
-//  connect(ui->seven_button, SIGNAL(clicked()), this, SLOT(ChangeInputButtonClicked(std::string value)));
-//  connect(ui->eight_button, SIGNAL(clicked()), this, SLOT(ChangeInputButtonClicked(std::string value)));
-//  connect(ui->nine_button, SIGNAL(clicked()), this, SLOT(ChangeInputButtonClicked(std::string value)));
-//  connect(ui->zero_button, SIGNAL(clicked()), this, SLOT(ChangeInputButtonClicked(std::string value)));
-//  connect(ui->double_zero_button, SIGNAL(clicked()), this, SLOT(ChangeInputButtonClicked(std::string value)));
-//  connect(ui->plus_button, SIGNAL(clicked()), this, SLOT(ChangeInputButtonClicked(std::string value)));
-//  connect(ui->minus_button, SIGNAL(clicked()), this, SLOT(ChangeInputButtonClicked(std::string value)));
-//  connect(ui->multiply_button, SIGNAL(clicked()), this, SLOT(ChangeInputButtonClicked(std::string value)));
-//  connect(ui->divide_button, SIGNAL(clicked()), this, SLOT(ChangeInputButtonClicked(std::string value)));
-//  connect(ui->dot_button, SIGNAL(clicked()), this, SLOT(ChangeInputButtonClicked(std::string value)));
+  //m_SignalMapper = new QSignalMapper(this);
 
-  connect(ui->equals_button, SIGNAL(clicked()), this, SLOT(GetResult()));
-  connect(ui->backspace_button, SIGNAL(clicked()), this, SLOT(Backspace()));
-  connect(ui->c_button, SIGNAL(clicked()), this, SLOT(Clean()));
+//  QObject::connect(ui->one_button, SIGNAL(clicked(bool)), m_SignalMapper, SLOT(map()));
+//  m_SignalMapper->setMapping(ui->one_button, ui->one_button->text());
+  connect(ui->one_button, &QPushButton::clicked, this, [this](){ DigitButtonClicked(ui->one_button->text()); });
+  connect(ui->two_button, &QPushButton::clicked, this, [this](){ DigitButtonClicked(ui->two_button->text()); });
+  connect(ui->three_button, &QPushButton::clicked, this, [this](){ DigitButtonClicked(ui->three_button->text()); });
+  connect(ui->four_button, &QPushButton::clicked, this, [this](){ DigitButtonClicked(ui->four_button->text()); });
+  connect(ui->five_button, &QPushButton::clicked, this, [this](){ DigitButtonClicked(ui->five_button->text()); });
+  connect(ui->six_button, &QPushButton::clicked, this, [this](){ DigitButtonClicked(ui->six_button->text()); });
+  connect(ui->seven_button, &QPushButton::clicked, this, [this](){ DigitButtonClicked(ui->seven_button->text()); });
+  connect(ui->eight_button, &QPushButton::clicked, this, [this](){ DigitButtonClicked(ui->eight_button->text()); });
+  connect(ui->nine_button, &QPushButton::clicked, this, [this](){ DigitButtonClicked(ui->nine_button->text()); });
+  connect(ui->zero_button, &QPushButton::clicked, this, [this](){ DigitButtonClicked(ui->zero_button->text()); });
+  connect(ui->double_zero_button, &QPushButton::clicked, this, [this](){ DigitButtonClicked(ui->double_zero_button->text()); });
+
+  connect(ui->plus_button, &QPushButton::clicked, this, [this](){ OperationButtonClicked(ui->plus_button->text()); });
+  connect(ui->minus_button, &QPushButton::clicked, this, [this](){ OperationButtonClicked(ui->minus_button->text()); });
+  connect(ui->multiply_button, &QPushButton::clicked, this, [this](){ OperationButtonClicked(ui->multiply_button->text()); });
+  connect(ui->divide_button, &QPushButton::clicked, this, [this](){ OperationButtonClicked(ui->divide_button->text()); });
+  connect(ui->dot_button, &QPushButton::clicked, this, [this](){ OperationButtonClicked(ui->dot_button->text()); });
+
+  connect(ui->equals_button, &QPushButton::clicked, this, [this](){ GetResult(); });
+  connect(ui->backspace_button, &QPushButton::clicked, this, [this](){ Backspace(); });
+  connect(ui->c_button, &QPushButton::clicked, this, [this](){ Clean(); });
 
   //
   m_Model->AddMainInputLabelObserver(m_MainInputLabel);
   m_Model->AddMainOutputLabelObserver(m_MainOutputLabel);
 }
 
-void MainWindow::ChangeInputButtonClicked(std::string value)
+void MainWindow::DigitButtonClicked(QString value)
 {
-  m_Controller->ChangeInput(value);
+  m_Controller->DigitButtonClicked(value);
+}
+
+void MainWindow::OperationButtonClicked(QString value)
+{
+  m_Controller->OperationButtonClicked(value);
 }
 
 void MainWindow::Clean()

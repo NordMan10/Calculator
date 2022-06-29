@@ -1,14 +1,14 @@
 #ifndef LABELOBSERVER_H
 #define LABELOBSERVER_H
 
-#include <string>
+#include <QString>
 
 class LabelObserver
 {
 public:
   virtual ~LabelObserver() {};
 
-  virtual void Update(std::string) {};
+  virtual void Update(QString) {};
 };
 
 #endif // LABELOBSERVER_H

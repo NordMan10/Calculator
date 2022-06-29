@@ -12,7 +12,8 @@ public:
   virtual ~IController() {};
 
 public slots:
-  virtual void ChangeInput(std::string) {};
+  virtual void DigitButtonClicked(QString) {};
+  virtual void OperationButtonClicked(QString) {};
   virtual void Clean() {};
   virtual void CalculateResult() {};
   virtual void Backspace() {};

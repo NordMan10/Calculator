@@ -13,7 +13,8 @@ public:
   ~DefaultController() override;
 
 //public slots:
-  void ChangeInput(std::string value) override;
+  void DigitButtonClicked(QString value) override;
+  void OperationButtonClicked(QString value) override;
   void Clean() override;
   void CalculateResult() override;
   void Backspace() override;

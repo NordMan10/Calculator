@@ -10,9 +10,14 @@ DefaultController::~DefaultController()
   delete m_Model;
 }
 
-void DefaultController::ChangeInput(std::string value)
+void DefaultController::DigitButtonClicked(QString value)
 {
-  m_Model->PushIntoInputLabel(value);
+  m_Model->PushDigitIntoInputLabel(value);
+}
+
+void DefaultController::OperationButtonClicked(QString value)
+{
+  m_Model->PushOperationIntoInputLabel(value);
 }
 
 void DefaultController::Clean()

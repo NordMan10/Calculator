@@ -8,10 +8,11 @@ class CalcQLabel : public LabelObserver
 {
 public:
   CalcQLabel();
-  CalcQLabel(std::string text);
+  CalcQLabel(QString text);
+  CalcQLabel(QLabel* label);
   ~CalcQLabel() override;
 
-  void Update(std::string text) override;
+  void Update(QString text) override;
   QLabel* GetLabel() const;
 
 private:

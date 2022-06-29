@@ -10,7 +10,8 @@ public:
   ~DefaultModel() override;
 
   void Calculate() override;
-  void PushIntoInputLabel(std::string text) override;
+  void PushDigitIntoInputLabel(QString text) override;
+  void PushOperationIntoInputLabel(QString text) override;
   void Backspace() override;
   void Clean() override;
 
@@ -18,15 +19,17 @@ public:
   void AddMainOutputLabelObserver(LabelObserver* observer) override;
   void RemoveMainInputLabelObserver(LabelObserver* observer) override;
   void RemoveMainOutputLabelObserver(LabelObserver* observer) override;
-  void NotifyMainInputLabelObservers(std::string text) override;
-  void NotifyMainOutputLabelObservers(std::string text) override;
+  void NotifyMainInputLabelObservers(QString text) override;
+  void NotifyMainOutputLabelObservers(QString text) override;
 
 private:
-  std::string m_MainInputLabel;
-  std::string m_MainOutputLabel;
+  QString m_MainInputLabel;
+  QString m_MainOutputLabel;
 
   std::vector<LabelObserver*> m_MainInputLabelObservers;
   std::vector<LabelObserver*> m_MainOutputLabelObservers;
+
+  QList<QString> m_OperationList{"+", "-", "*", "/", "."};
 };
 
 #endif // DEFAULTMODEL_H

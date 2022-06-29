@@ -5,11 +5,14 @@ CalcQLabel::CalcQLabel()
   m_Label = new QLabel();
 }
 
-CalcQLabel::CalcQLabel(std::string text)
+CalcQLabel::CalcQLabel(QString text)
 {
   m_Label = new QLabel();
-  m_Label->setText(QString::fromStdString(text));
+  m_Label->setText(text);
 }
+
+CalcQLabel::CalcQLabel(QLabel* label)
+  : m_Label(label) {}
 
 CalcQLabel::~CalcQLabel()
 {
@@ -21,7 +24,7 @@ QLabel* CalcQLabel::GetLabel() const
   return m_Label;
 }
 
-void CalcQLabel::Update(std::string text)
+void CalcQLabel::Update(QString text)
 {
-  m_Label->setText(QString::fromStdString(text));
+  m_Label->setText(text);
 }

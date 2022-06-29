@@ -13,8 +13,7 @@ SOURCES += \
     DefaultController.cpp \
     DefaultModel.cpp \
     main.cpp \
-    MainWindow.cpp \
-    tr.cpp
+    MainWindow.cpp
 
 HEADERS += \
     CalcQLabel.h \
@@ -23,8 +22,7 @@ HEADERS += \
     IController.h \
     IModel.h \
     LabelObserver.h \
-    MainWindow.h \
-    tr.h
+    MainWindow.h
 
 FORMS += \
     MainWindow.ui
